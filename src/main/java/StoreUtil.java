@@ -162,10 +162,10 @@ public class StoreUtil {
                 connection.prepareStatement("UPDATE shopping_card SET status = ?::CURRENT_STATUS WHERE id = ?");
 
         while (resultSet.next()) {
-            Long cardId = resultSet.getLong(1);
+            long cardId = resultSet.getLong(1);
             stringBuilder.append(resultSet.getString(2)).append(", ");
             BigDecimal price = resultSet.getBigDecimal(3);
-            Integer amount = resultSet.getInt(4);
+            int amount = resultSet.getInt(4);
             sum = sum.add(price.multiply(BigDecimal.valueOf(amount)).setScale(2));
             //Update status after extracting data
             changeStatus.setString(1, CURRENT_STATUS.ORDERED.value);

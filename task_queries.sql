@@ -6,7 +6,7 @@
 --FROM users
 --WHERE first_name LIKE '%а%' OR last_name LIKE '%а%';
 
--- 3    Вывести информацию о продуктах с ценой выше 100
+-- 3    Вывести информацию о продуктах с ценой выше 1000
 --SELECT name, price
 --FROM products
 --WHERE price > 1000;
@@ -63,24 +63,24 @@
 
 -- 12	Вывести список пользователей, у которых суммарная стоимость продуктов
 -- в корзине превышает среднюю стоимость продуктов в корзине всех пользователей.
---SELECT concat_ws(' ', u.first_name, u.last_name) AS username, avg(shc.amount * p.price)
+--SELECT concat_ws(' ', u.first_name, u.last_name) AS username, sum(shc.amount * p.price)
 --FROM shopping_card AS shc
 --INNER JOIN users AS u ON shc.user_id = u.id
 --INNER JOIN products AS p ON shc.product_id = p.id
 --GROUP BY username
---HAVING avg(shc.amount * p.price) > (
+--HAVING sum(shc.amount * p.price) > (
 --    SELECT avg(p.price * shc.amount)
 --    FROM shopping_card AS shc
 --    INNER JOIN products AS p ON shc.product_id = p.id
 --    );
 
 -- 13	Вывести пользователей, у которых все продукты в корзине имеют цену выше 1000
---SELECT concat_ws(' ', u.first_name, u.last_name)
---FROM shopping_card AS shc
---INNER JOIN products AS p ON shc.product_id = p.id
---INNER JOIN users    AS u ON shc.user_id = u.id
---WHERE p.price > 1000
---GROUP BY u.id
+SELECT concat_ws(' ', u.first_name, u.last_name)
+FROM shopping_card AS shc
+INNER JOIN products AS p ON shc.product_id = p.id
+INNER JOIN users    AS u ON shc.user_id = u.id
+WHERE p.price > 1000
+GROUP BY u.id
 
 -- 14	Вывести список продуктов, которые есть в корзине у всех пользователей
 --SELECT name
